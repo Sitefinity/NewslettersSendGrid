@@ -24,7 +24,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\SitefinityWebApp\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -34,7 +34,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\SitefinityWebApp\bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -89,12 +89,8 @@
       <HintPath>..\packages\ServiceStack.Interfaces.4.0.40\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid+xamarin.ios10\ServiceStack.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.OpenAccess, Version=2015.2.624.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Telerik.Sitefinity.OpenAccess.2015.2.624.1\lib\net40\Telerik.OpenAccess.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.OpenAccess.Sync">
-      <HintPath>..\packages\Telerik.Sitefinity.OpenAccess.8.1.5800.0\lib\net40\Telerik.OpenAccess.Sync.dll</HintPath>
+    <Reference Include="Telerik.OpenAccess">
+      <HintPath>..\packages\Telerik.DataAccess.Core.2015.2.624.1\lib\net40\Telerik.OpenAccess.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Sitefinity">
       <HintPath>..\packages\Telerik.Sitefinity.Core.8.1.5800.0\lib\net40\Telerik.Sitefinity.dll</HintPath>

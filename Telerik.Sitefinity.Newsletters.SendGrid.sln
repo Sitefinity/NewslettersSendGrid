@@ -7,22 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telerik.Sitefinity.Newslett
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telerik.Sitefinity.Newsletters.SendGrid.Test", "Telerik.Sitefinity.Newsletters.SendGrid.Test\Telerik.Sitefinity.Newsletters.SendGrid.Test.csproj", "{A6C0B27E-3F9B-4A0E-913C-D9225BD2CAF5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{238565CB-5E28-4604-AA4D-13E1AF926289}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StyleCop", "StyleCop", "{7919BDC2-66EB-4C78-B42D-51C204BB1B31}"
+	ProjectSection(SolutionItems) = preProject
+		Builds\StyleCop\StyleCop.Targets = Builds\StyleCop\StyleCop.Targets
+	EndProjectSection
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs.telerik.com:8082/defaultcollection
-		SccProjectUniqueName0 = Telerik.Sitefinity.Newsletters.SendGrid\\Telerik.Sitefinity.Newsletters.SendGrid.csproj
-		SccProjectName0 = Telerik.Sitefinity.Newsletters.SendGrid
-		SccAuxPath0 = http://tfs.telerik.com:8082/defaultcollection
-		SccLocalPath0 = Telerik.Sitefinity.Newsletters.SendGrid
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName1 = Telerik.Sitefinity.Newsletters.SendGrid.Test\\Telerik.Sitefinity.Newsletters.SendGrid.Test.csproj
-		SccProjectName1 = Telerik.Sitefinity.Newsletters.SendGrid.Test
-		SccAuxPath1 = http://tfs.telerik.com:8082/defaultcollection
-		SccLocalPath1 = Telerik.Sitefinity.Newsletters.SendGrid.Test
-		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
