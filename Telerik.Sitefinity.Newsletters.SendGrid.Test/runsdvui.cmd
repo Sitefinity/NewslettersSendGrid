@@ -1,0 +1,2 @@
+cd /d "C:\CMS\Sitefinity 4.0\Code Base\Telerik.Sitefinity.Newsletters.SendGrid.Test" &msbuild "Telerik.Sitefinity.Newsletters.SendGrid.Test.csproj" /t:sdvViewer /p:configuration="Debug" /p:platform=Any CPU
+exit %errorlevel% 
