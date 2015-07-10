@@ -107,7 +107,6 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Test
 
         private readonly static string Subscriber1FirstName = "John";
         private readonly static string Subscriber1Email = "John.Smith@telerik.com";
-        private readonly static string Subscriber1LastName = "Smith";
         private readonly static string Subscriber1ResolveKey = "4bb0d672-f33b-69db-9dcf-ff0000f26bea";
 
         private readonly static string Subscriber2FirstName = "Carl";
