@@ -1,7 +1,7 @@
 # Sitefinity Email campaigns SendGrid connector
 
 ###Summary
-_This project implements a two way communication between the SendGrid Web API and the Sitefinity email campaigns (newsletters) module, enabling full integration between the two systems._
+_This project implements a two way communication between the SendGrid Web API and the Sitefinity email campaigns (newsletters) module, enabling partial integration between the two systems._
 
 The project consist of two major components:
 * The first one 'SendGridSender.cs' is responsible for adapting the Sitefinity email campaigns data for SendGrid and transporting it to the SendGrid services. It is an implementation of base sender of the Sitefinity notifications system.
@@ -14,4 +14,4 @@ The project consist of two major components:
 
 * Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Advanced/Notifications. Then in the tree view on the left expand Profiles and select SendGrid. Here you will have to specify a valid port and host address although their values are not going to be used since the SendGrid SDK uses a hardcoded address for service calls. You can use 'api.sendgrid.com' for host and '80' for port. Enter your SendGrid account username and password then change the SenderType to __Telerik.Sitefinity.Newsletters.SendGrid.Notifications.SendGridSender__.
 
-* Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Basic/Newsletters/?sf_global=true and change the active profile to SendGrid
+* Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Basic/Newsletters/?sf_global=true and change the active profile to SendGrid.
