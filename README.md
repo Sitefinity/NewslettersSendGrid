@@ -1,7 +1,7 @@
 # Sitefinity Email campaigns SendGrid connector
 
 ###Summary
-_This project implements a two way communication between the SendGrid Web API and the Sitefinity email campaigns (newsletters) module, enabling partial integration between the two systems._
+_This project implements a two way communication between the SendGrid Web API and the Sitefinity email campaigns (newsletters) module._
 
 The project consist of two major components:
 * The first one 'SendGridSender.cs' is responsible for adapting the Sitefinity email campaigns data for SendGrid and transporting it to the SendGrid services. It is an implementation of base sender of the Sitefinity notifications system.
