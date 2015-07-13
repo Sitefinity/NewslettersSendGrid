@@ -15,3 +15,5 @@ The project consist of two major components:
 * Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Advanced/Notifications. Then in the tree view on the left expand Profiles and select SendGrid. Here you will have to specify a valid port and host address although their values are not going to be used since the SendGrid SDK uses a hardcoded address for service calls. You can use 'api.sendgrid.com' for host and '80' for port. Enter your SendGrid account username and password then change the SenderType to __Telerik.Sitefinity.Newsletters.SendGrid.Notifications.SendGridSender__.
 
 * Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Basic/Newsletters/?sf_global=true and change the active profile to SendGrid.
+
+* In your SendGrid account navigate to Dashboard, then Settings -> Mail Settings and activate the event notification app. You have to specify the HTTP post URL to http://__[mySitefinityWebSite]__/restapi/sendgrid/events.
