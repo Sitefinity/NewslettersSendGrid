@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Telerik.Sitefinity.Services.Notifications;
 
@@ -40,7 +41,7 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
 
         private static string GetMergeTag(string propertyName)
         {
-            return string.Format(MergeTagTemplate, propertyName);
+            return string.Format(CultureInfo.InvariantCulture, MergeTagTemplate, propertyName);
         }
 
         private static string GetPropertyValue(string value)
@@ -48,7 +49,7 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
             return !value.IsNullOrEmpty() ? value : string.Empty;
         }
 
-        private static readonly string MergeTagTemplate = SubscriberCategory + ".{0}";
+        private const string MergeTagTemplate = SubscriberCategory + ".{0}";
 
         /// <summary>
         /// Contains the category used as first part in the subscriber merge tags.

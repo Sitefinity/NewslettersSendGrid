@@ -10,7 +10,7 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid
     /// <summary>
     /// Contains Sitefinity newsletter templates placeholders related constants.
     /// </summary>
-    public class NewsletterTemplatesConstants
+    public static class NewsletterTemplatesConstants
     {
         /// <summary>
         /// The placeholder start tag. 

@@ -90,9 +90,12 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
         /// Performs application-defined tasks associated with freeing, releasing,
         /// or resetting unmanaged resources.
         /// </summary>
-        public override void Dispose()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
+            Justification = "The IDisposable interface is imposed by the base class but there is nothing to dispose of.")]
+        public sealed override void Dispose()
         {
-            // Nothing to dispose.
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -200,10 +203,10 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
             foreach (var substitution in substitutions)
             {
                 string replacementTagsValues = substitution
-                    .Key
-                    .Replace(NewsletterTemplatesConstants.PlaceholdersStartTag, string.Empty)
-                    .Replace(NewsletterTemplatesConstants.PlaceholderEndTag, string.Empty)
-                    .Trim();
+                                                           .Key
+                                                           .Replace(NewsletterTemplatesConstants.PlaceholdersStartTag, string.Empty)
+                                                           .Replace(NewsletterTemplatesConstants.PlaceholderEndTag, string.Empty)
+                                                           .Trim();
 
                 string value;
 

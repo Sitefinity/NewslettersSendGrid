@@ -66,9 +66,9 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Services.Dto
         /// <summary>
         /// Gets or sets the bounce type.
         /// </summary>
-        /// <value>The type.</value>
+        /// <value>The bounce type.</value>
         [DataMember(Name = "type")]
-        public string Type { get; set; }
+        public string BounceType { get; set; }
 
         /// <summary>
         /// Gets or sets the reason for the bounce.
