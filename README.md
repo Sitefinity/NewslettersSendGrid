@@ -1,12 +1,18 @@
 # Sitefinity Email campaigns SendGrid connector
 
 ###Summary
-_This project implements a two way communication between the SendGrid Web API and the Sitefinity email campaigns (newsletters) module, enabling partial integration between the two systems._
+_This project implements a two way communication between the SendGrid Web API and the Sitefinity email campaigns (newsletters) module._
 
 The project consist of two major components:
 * The first one 'SendGridSender.cs' is responsible for adapting the Sitefinity email campaigns data for SendGrid and transporting it to the SendGrid services. It is an implementation of base sender of the Sitefinity notifications system.
 
 * The second component 'SendGridEventsInboundService.cs' is a web service that receives event notifications by SendGrid about failed deliveries. It is implemented using the Service Stack components and for now can handle only dropped and bounced events that notify of a failed delivery.
+
+###Requirements
+
+* The two way communication depends on the ability of the SendGrid services to notify your Sitefinity web application for unsuccessful email deliveries. This means that your Sitefinity web site must be publicly accessible.
+
+* The solution was created using Visual Studio 2013. Backward compatibility with Visual Studio 2012 seems to be broken due to the way the nuget.targets msbuild file specifies the path to the Microsoft.Build.Tasks.v4.0.dll file.
 
 ###How to install
 
@@ -15,3 +21,6 @@ The project consist of two major components:
 * Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Advanced/Notifications. Then in the tree view on the left expand Profiles and select SendGrid. Here you will have to specify a valid port and host address although their values are not going to be used since the SendGrid SDK uses a hardcoded address for service calls. You can use 'api.sendgrid.com' for host and '80' for port. Enter your SendGrid account username and password then change the SenderType to __Telerik.Sitefinity.Newsletters.SendGrid.Notifications.SendGridSender__.
 
 * Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Basic/Newsletters/?sf_global=true and change the active profile to SendGrid.
+
+* In your SendGrid account navigate to Dashboard, then Settings -> Mail Settings and activate the event notification app. You have to specify the HTTP post URL to http://__[mySitefinityWebSite]__/restapi/sendgrid/events and then check the Bounced and Dropped events.
+
