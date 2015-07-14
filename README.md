@@ -10,9 +10,9 @@ The project consist of two major components:
 
 ###Requirements
 
-* The two way communication depends on the ability of the SendGrid services to notify your Sitefinity web application for unsuccesfull email deliveries. This means that your Sitefinity web site must be publicly accesible.
+* The two way communication depends on the ability of the SendGrid services to notify your Sitefinity web application for unsuccessful email deliveries. This means that your Sitefinity web site must be publicly accessible.
 
-* The solution was created using Visual Studio 2013. Backward compatibility with Visual Studio 2012 seems to be broken due to the way the the nuget.targets msbuild file spcifies the path to the Microsoft.Build.Tasks.v4.0.dll file.
+* The solution was created using Visual Studio 2013. Backward compatibility with Visual Studio 2012 seems to be broken due to the way the nuget.targets msbuild file specifies the path to the Microsoft.Build.Tasks.v4.0.dll file.
 
 ###How to install
 
@@ -23,3 +23,4 @@ The project consist of two major components:
 * Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Basic/Newsletters/?sf_global=true and change the active profile to SendGrid.
 
 * In your SendGrid account navigate to Dashboard, then Settings -> Mail Settings and activate the event notification app. You have to specify the HTTP post URL to http://__[mySitefinityWebSite]__/restapi/sendgrid/events and then check the Bounced and Dropped events.
+
