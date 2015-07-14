@@ -8,6 +8,12 @@ The project consist of two major components:
 
 * The second component 'SendGridEventsInboundService.cs' is a web service that receives event notifications by SendGrid about failed deliveries. It is implemented using the Service Stack components and for now can handle only dropped and bounced events that notify of a failed delivery.
 
+###Requirements
+
+* The two way communication depends on the ability of the SendGrid services to notify your Sitefinity web application for unsuccesfull email deliveries. This means that your Sitefinity web site must be publicly accesible.
+
+* The solution was created using Visual Studio 2013. Backward compatibility with Visual Studio 2012 seems to be broken due to the way the the nuget.targets msbuild file spcifies the path to the Microsoft.Build.Tasks.v4.0.dll file.
+
 ###How to install
 
 * Build the main project (Telerik.Sitefinity.Newsletters.SendGrid) in this repository with the correct Sitefinity references and place the resulting dll in the \bin directory of your Sitefinity web site or install the corresponding NuGet package from the official Sitefinity nuget repository. 
@@ -16,4 +22,4 @@ The project consist of two major components:
 
 * Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Basic/Newsletters/?sf_global=true and change the active profile to SendGrid.
 
-* In your SendGrid account navigate to Dashboard, then Settings -> Mail Settings and activate the event notification app. You have to specify the HTTP post URL to http://__[mySitefinityWebSite]__/restapi/sendgrid/events.
+* In your SendGrid account navigate to Dashboard, then Settings -> Mail Settings and activate the event notification app. You have to specify the HTTP post URL to http://__[mySitefinityWebSite]__/restapi/sendgrid/events and then check the Bounced and Dropped events.
