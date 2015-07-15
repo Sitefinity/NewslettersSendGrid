@@ -4,9 +4,9 @@
 _This project implements a two way communication between the SendGrid Web API and the Sitefinity email campaigns (newsletters) module._
 
 The project consist of two major components:
-* The first one 'SendGridSender.cs' is responsible for adapting the Sitefinity email campaigns data for SendGrid and transporting it to the SendGrid services. It is an implementation of base sender of the Sitefinity notifications system.
+* The first one 'SendGridSender.cs' is responsible for adapting the Sitefinity email campaigns data for SendGrid and transporting it to the SendGrid services. It is an implementation of the Sitefinity notifications system base sender.
 
-* The second component 'SendGridEventsInboundService.cs' is a web service that receives event notifications by SendGrid about failed deliveries. It is implemented using the Service Stack components and for now can handle only dropped and bounced events that notify of failed deliveries.
+* The second component 'SendGridEventsInboundService.cs' is a web service that receives event notifications by SendGrid about failed deliveries. It is implemented using the Service Stack components and for now can handle only dropped and bounced events.
 
 ###Requirements
 
@@ -17,7 +17,7 @@ The project consist of two major components:
 By default the web service in Sitefinity that receives the event notifications from SendGrid requires an authenticated backend user to prevent unauthorized access to the service functionality.
 It is advisable that a specific user is created for this purpose. Since SendGrid uses basic authentication and therefore supplies the username and password combination in each request an HTTPS connection is highly recommended. 
 
-As for now the service functionality of the service is limited to writing failed delivery entries in the database only if the request contains a valid campaign and subscriber ids which makes the service a bit more resilient to attacks. This is why the authentication requirement can be switched off with a configuration change [see below for instructions](#How-to-switch-off-required-authentication).
+As for now the service functionality of the service is limited to writing failed delivery entries in the database only if the request contains a valid campaign and subscriber ids which makes the service a bit more resilient to attacks. This is why the authentication requirement can be switched off with a configuration change [see how to switch off required authentication](#How-to-switch-off-required-authentication).
 
 ###How to install
 
