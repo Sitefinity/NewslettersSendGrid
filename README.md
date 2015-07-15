@@ -23,6 +23,11 @@ As for now the service functionality of the service is limited to writing failed
 
 * Build the main project (Telerik.Sitefinity.Newsletters.SendGrid) in this repository with the correct Sitefinity package versions and place the resulting dll in the \bin directory of your Sitefinity web site or install the Sitefinity built package from the official Sitefinity NuGet repository. We will supply a signed package in our NuGet repository for each official Sitefinity version.
 
+* Install from Sitefinity NuGet repository:
+```powershell
+Install-Package Telerik.Sitefinity.Newsletters.SendGrid -Version 8.1.5800.0 -Source http://nuget.sitefinity.com/nuget/
+```
+
 * Navigate to http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Advanced/Notifications. Then in the tree view on the left expand Profiles and select SendGrid. Here you will have to specify a valid port and host address although their values are not going to be used since the SendGrid SDK uses a hardcoded address for service calls. You can use 'api.sendgrid.com' for host and '80' for port. Enter your SendGrid account username and password then change the SenderType to __Telerik.Sitefinity.Newsletters.SendGrid.Notifications.SendGridSender__.
 
 * Navigate to 'http://__[mySitefinityWebSite]__/Sitefinity/Administration/Settings/Basic/Newsletters/?sf_global=true' and change the active profile to SendGrid.
