@@ -38,7 +38,7 @@ Install-Package Telerik.Sitefinity.Newsletters.SendGrid -Version 8.1.5800.0 -Sou
 
 ###How to switch off required authentication
 
-You can't switch off the authentication requirement of the event receiving Sitefinity service by adding an application setting in the web.config.
+You can switch off the authentication requirement of the SendGrid event receiving Sitefinity service by adding an application setting in the web.config.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?> 
