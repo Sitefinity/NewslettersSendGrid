@@ -34,7 +34,7 @@ Install-Package Telerik.Sitefinity.Newsletters.SendGrid -Version 8.1.5800.0 -Sou
 
 * In your SendGrid account navigate to Dashboard, then Settings -> Mail Settings and activate the event notification app. You have to specify the HTTP post URL to 'http(s)://__[username]:[password]@[mySitefinityWebSite]__/restapi/sendgrid/events' or 'http(s)://__[mySitefinityWebSite]__/restapi/sendgrid/events' if you have disabled the authentication requirement ([see setup considerations](#setup considerations)).  Then check the Bounced and Dropped events to be reported and then save the configuration.
 
-* Create a Sitefinity backend user with the specified [username] and [password] of the step above.
+* Create a Sitefinity __backend__ user with the specified [username] and [password] of the step above.
 
 ###How to switch off required authentication
 
