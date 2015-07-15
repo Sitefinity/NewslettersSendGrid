@@ -23,6 +23,6 @@ using System.Reflection;
 [assembly: AssemblyVersion("8.1.5800.0")]
 [assembly: AssemblyFileVersion("8.1.0.0")]
 #else
-[assembly: AssemblyVersion("8.1.*")]
+[assembly: AssemblyVersion("8.1.5800.0")]
 [assembly: AssemblyFileVersion("8.1.0.0")]
 #endif

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using ServiceStack;
@@ -7,6 +8,7 @@ using Telerik.Sitefinity.Modules.Newsletters;
 using Telerik.Sitefinity.Modules.Newsletters.Communication;
 using Telerik.Sitefinity.Newsletters.Model;
 using Telerik.Sitefinity.Newsletters.SendGrid.Services.Dto;
+using Telerik.Sitefinity.Web.Services;
 
 namespace Telerik.Sitefinity.Newsletters.SendGrid.Services
 {
@@ -21,6 +23,11 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Services
         /// <param name="events">An array of the events that have occurred.</param>
         public void Post(SendGridEvent[] events)
         {
+            if (this.IsToRequireAuthentication())
+            {
+                ServiceUtility.RequestBackendUserAuthentication();
+            }
+
             // TODO: provider name should be configurable
             // TODO: get the manager only if an event that we are interested in is present in the events variable.
             // Could be done with a property but I am not aware of the this object lifecycle at the moment.
@@ -66,7 +73,7 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Services
 
             this.Response.StatusCode = (int)HttpStatusCode.OK;
         }
- 
+
         private BounceStatus ResolveStatus(SendGridEvent sendGridEvent)
         {
             BounceStatus bounceStatus;
@@ -121,6 +128,21 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Services
 
             BounceAction bounceAction = bounceActionResolver.ResolveAction(bounceStatus);
             bounceActionResolver.PerformAction(newslettersManager, subscriber.Id, bounceAction, false);
+        }
+
+        private bool IsToRequireAuthentication()
+        {
+            // Defaulted to true if no setting is present.
+            bool requireAuthentcation;
+            var requireAuthString = ConfigurationManager.AppSettings["SendGridConnector:RequireAuth"];
+            if (requireAuthString != null && bool.TryParse(requireAuthString, out requireAuthentcation))
+            {
+                return requireAuthentcation;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
