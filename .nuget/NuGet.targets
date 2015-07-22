@@ -116,7 +116,7 @@
 
                     Log.LogMessage("Downloading latest version of NuGet.exe...");
                     WebClient webClient = new WebClient();
-                    webClient.DownloadFile(@"\\telerik.com\resources\Controls\DISTRIBUTIONS\Sitefinity\nuget\NuGet.exe", OutputFilename);
+                    webClient.DownloadFile("https://www.nuget.org/nuget.exe", OutputFilename);
 
 
                     return true;
