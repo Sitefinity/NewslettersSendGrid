@@ -47,6 +47,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\Builds\FxCop\Sitefinity.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <NoWarn>1699</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
