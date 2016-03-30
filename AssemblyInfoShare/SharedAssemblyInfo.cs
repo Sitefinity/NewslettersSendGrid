@@ -6,7 +6,7 @@ using System.Reflection;
 // associated with an assembly.
 [assembly: AssemblyCompany("Telerik")]
 [assembly: AssemblyProduct("Telerik Sitefinity CMS")]
-[assembly: AssemblyCopyright("Copyright © 2005-2015 Telerik AD")]
+[assembly: AssemblyCopyright("Copyright © 2005-2016 Telerik AD")]
 [assembly: AssemblyTrademark("Sitefinity")]
 // Version information for an assembly consists of the following four values:
 //
@@ -20,9 +20,9 @@ using System.Reflection;
 // [assembly: AssemblyVersion("1.0.*")]
 
 #if DEBUG
-[assembly: AssemblyVersion("8.1.5800.0")]
-[assembly: AssemblyFileVersion("8.1.0.0")]
+[assembly: AssemblyVersion("9.0.6000.0")]
+[assembly: AssemblyFileVersion("9.0.6000.0")]
 #else
-[assembly: AssemblyVersion("8.1.5800.0")]
-[assembly: AssemblyFileVersion("8.1.0.0")]
+[assembly: AssemblyVersion("9.0.6000.0")]
+[assembly: AssemblyFileVersion("9.0.6000.0")]
 #endif
