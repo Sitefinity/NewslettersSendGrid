@@ -6,6 +6,7 @@
     <CollectionProperty Name="RecognizedWords">
       <Value>flag</Value>
       <Value>Sitemap</Value>
+	    <Value>Sitefinity</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Analyzers>
