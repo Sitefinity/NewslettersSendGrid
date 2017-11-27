@@ -226,7 +226,7 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
             // Initializing the substitutions dictionary so that it can later be accessed by replacementTag.
             foreach (var replacementTag in replacementTags)
             {
-                substitutions.Add(replacementTag, new List<string>(this.BatchSize));
+                substitutions[replacementTag] = new List<string>(this.BatchSize);
             }
 
             foreach (var customHeader in customHeaders)
@@ -234,7 +234,7 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
                 // add substitution dictionaries only if the custom header value is a placeholder.
                 if (NewsletterTemplatesConstants.PlaceholdersRegex.IsMatch(customHeader.Value))
                 {
-                    substitutions.Add(customHeader.Value, new List<string>(this.BatchSize));
+                    substitutions[customHeader.Value] = new List<string>(this.BatchSize);
                 }
             }
 
