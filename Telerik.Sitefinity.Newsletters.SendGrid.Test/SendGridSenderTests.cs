@@ -1,13 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Telerik.Sitefinity.Newsletters.SendGrid.Notifications;
-using Telerik.Sitefinity.Services.Notifications;
+using SendGrid.Helpers.Mail;
+using ServiceStack.Text;
 using System.Collections.Generic;
 using Telerik.JustMock;
-using System.Net.Mail;
-using SendGrid.SmtpApi;
-using ServiceStack.Text;
+using Telerik.Sitefinity.Newsletters.SendGrid.Notifications;
+using Telerik.Sitefinity.Services.Notifications;
 
 namespace Telerik.Sitefinity.Newsletters.SendGrid.Test
 {
@@ -30,30 +28,45 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Test
 
             var message = sender.ConstructMessage(messageJob, subscribers);
 
-            CollectionAssert.AreEquivalent(subscribers.Select(s => new MailAddress(s.Email)).ToList(), message.To.ToList());
-            Assert.AreEqual(messageJob.MessageTemplate.BodyHtml, message.Html);
-            Assert.AreEqual(messageJob.MessageTemplate.PlainTextVersion, message.Text);
-            this.AssertHeader(message.Header);
+            var expected = subscribers.Select(s => s.Email).ToList();
+            var actual = message.Personalizations.SelectMany(x => x.Tos).Select(x => x.Email).ToList();
+
+            CollectionAssert.AreEquivalent(expected, actual);
+            Assert.AreEqual(messageJob.MessageTemplate.BodyHtml, message.HtmlContent);
+            Assert.AreEqual(messageJob.MessageTemplate.PlainTextVersion, message.PlainTextContent);
+            this.AssertHeader(message);
         }
 
-        private void AssertHeader(IHeader header)
+        private void AssertHeader(SendGridMessage message)
         {
-            var headerObj = JsonObject.Parse(header.JsonString());
-            var subs = headerObj.Object("sub");
+            var headerObj = JsonObject.Parse(message.Serialize());
+            var personalizations = headerObj.ArrayObjects("personalizations");
 
-            var firstNameSubstitutions = subs.Get<string[]>(FirstNamePlaceholder).ToList();
-            CollectionAssert.AreEqual(new List<string> { Subscriber1FirstName, Subscriber2FirstName }, firstNameSubstitutions);
+            var personalization = personalizations[0];
+            var substitutions = personalization.ArrayObjects("substitutions");
 
-            var lastNameSubstitutions = subs.Get<string[]>(LastNamePlaceholder).ToList();
-            CollectionAssert.AreEqual(new List<string> { "", Subscriber2LastName }, lastNameSubstitutions);
+            var firstNameSubstitution = substitutions[0][FirstNamePlaceholder];
+            Assert.AreEqual(Subscriber1FirstName, firstNameSubstitution);
 
-            var emailSubstitutions = subs.Get<string[]>(EmailPlaceholder).ToList();
-            CollectionAssert.AreEqual(new List<string> { Subscriber1Email, Subscriber2Email }, emailSubstitutions);
+            var lastNameSubstitution = substitutions[0][LastNamePlaceholder];
+            Assert.AreEqual(Subscriber1LastName, lastNameSubstitution);
 
-            var resolveKeySubstitutions = subs.Get<string[]>(ResolveKeyPlaceholder).ToList();
-            CollectionAssert.AreEqual(new List<string> { Subscriber1ResolveKey, Subscriber2ResolveKey }, resolveKeySubstitutions);
+            var emailSubstitution = substitutions[0][EmailPlaceholder];
+            Assert.AreEqual(Subscriber1Email, emailSubstitution);
 
-            var uniqueArgs = headerObj.Object("unique_args");
+            personalization = personalizations[1];
+            substitutions = personalization.ArrayObjects("substitutions");
+
+            firstNameSubstitution = substitutions[0][FirstNamePlaceholder];
+            Assert.AreEqual(Subscriber2FirstName, firstNameSubstitution);
+
+            lastNameSubstitution = substitutions[0][LastNamePlaceholder];
+            Assert.AreEqual(Subscriber2LastName, lastNameSubstitution);
+
+            emailSubstitution = substitutions[0][EmailPlaceholder];
+            Assert.AreEqual(Subscriber2Email, emailSubstitution);
+
+            var uniqueArgs = headerObj.Object("custom_args");
 
             var campaingId = uniqueArgs.Get(CampaignCustomHeaderKey);
             Assert.AreEqual(CampaignCustomHeaderValue, campaingId);
@@ -106,6 +119,7 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Test
         private readonly static string ResolveKeyPlaceholder = "{|Subscriber.ResolveKey|}";
 
         private readonly static string Subscriber1FirstName = "John";
+        private readonly static string Subscriber1LastName = string.Empty;
         private readonly static string Subscriber1Email = "John.Smith@telerik.com";
         private readonly static string Subscriber1ResolveKey = "4bb0d672-f33b-69db-9dcf-ff0000f26bea";
 

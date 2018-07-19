@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using SendGrid;
+using SG = SendGrid.Helpers.Mail;
 using Telerik.Microsoft.Practices.Unity.Utility;
 using Telerik.Sitefinity.Services.Notifications;
 using Telerik.Sitefinity.Services.Notifications.Composition;
 using Telerik.Sitefinity.Services.Notifications.Configuration;
-using SG = SendGrid;
 
 namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
 {
@@ -64,16 +62,9 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
         }
 
         /// <summary>
-        /// Gets or sets the user name of the SendGrid account used to send the emails.
+        /// Gets the API key of the send grid profile.
         /// </summary>
-        /// <value>The SendGrid user name.</value>
-        public string Username { get; set; }
-
-        /// <summary>
-        /// Gets or sets the password of the SendGrid account.
-        /// </summary>
-        /// <value>The SendGrid account password.</value>
-        public string Password { get; set; }
+        public string ApiKey { get; private set; }
 
         /// <summary>
         /// Sends an instant message to the specified subscriber.
@@ -113,7 +104,7 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
             var task = this.SendAsync(message);
             return task.Result;
         }
- 
+
         /// <summary>
         /// Constructs a SendGrid message based on the specified <paramref name="messageJob"/> and <paramref name="subscribers"/>.
         /// </summary>
@@ -125,14 +116,11 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
             //// TODO: raise some events here. There is a high chance someone would like 
             //// to extend the message before or after it has been constructed in the following code.
             var message = new SG.SendGridMessage();
-
+            message.Personalizations = new List<SG.Personalization>();
             this.AddGlobalProperties(message, messageJob);
 
             // Adding per subscriber information that is needed to build the message template and the subscriber id custom message header.
             this.AddSubscribersInfo(message, messageJob, subscribers);
-
-            // Adding the custom headers of the message job
-            this.AddCustomHeaders(message, messageJob.CustomMessageHeaders);
             return message;
         }
 
@@ -145,17 +133,14 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
         /// that indicates the weather the sending was successful or not.</returns>
         public async Task<SendResult> SendAsync(SG.SendGridMessage message)
         {
-            // Create credentials, specifying your user name and password.
-            var credentials = new NetworkCredential(this.Username, this.Password);
-
             // Create a Web transport for sending email.
-            var transportWeb = new SG.Web(credentials);
+            var transportWeb = new SendGridClient(this.ApiKey);
 
             try
             {
                 // No need for asynchronous execution since the sender is invoked in a separate thread
                 // dedicated to sending the messages.
-                await transportWeb.DeliverAsync(message);
+                await transportWeb.SendEmailAsync(message);
 
                 return SendResult.ReturnSuccess();
             }
@@ -175,77 +160,55 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
         {
             IEnumerable<string> replacementTags = this.GetReplacementTags(messageJob);
 
-            // Creating Dictionary<string, List<string>> that will contain the replacement tag like {|Subscriber.Name|} and custom headers
-            // like {|Subscriber.ResolveKey|} as keys. The value will be the list of per subscriber values in the same order as the list of 
-            // emails to send to.
-            var substitutions = this.InitializeSubstitutions(replacementTags, messageJob.CustomMessageHeaders);
-
-            // Filling in the substitutions data structure with per subscriber values.
+            // Filling in the substitutions data structure with per subscriber values via persionalizations.
             foreach (var subscriber in subscribers)
             {
                 // TODO: validate subscribers email addresses
                 // TODO: add email + recipient name as TO address.
-                message.AddTo(subscriber.Email);
+                var personalization = new SG.Personalization()
+                {
+                    Tos = new List<SG.EmailAddress>() { new SG.EmailAddress(subscriber.Email) },
+                    Substitutions = this.CalculateSubstitutions(replacementTags, subscriber.ToDictionary())
+                };
 
-                var subscriberPropertiesAsDict = subscriber.ToDictionary();
-                this.CalculateSubstitutions(substitutions, subscriberPropertiesAsDict);
-            }
-
-            // Adding the constructed substitutions in the SendGrid message.
-            foreach (var substitutionPair in substitutions)
-            {
-                message.AddSubstitution(substitutionPair.Key, substitutionPair.Value);
+                message.Personalizations.Add(personalization);
             }
         }
- 
-        private void CalculateSubstitutions(Dictionary<string, List<string>> substitutions, Dictionary<string, string> subscriberProperties)
+
+        private Dictionary<string, string> CalculateSubstitutions(IEnumerable<string> replacementTags, Dictionary<string, string> subscriberProperties)
         {
-            foreach (var substitution in substitutions)
+            var substitutions = new Dictionary<string, string>();
+            foreach (var tag in replacementTags)
             {
-                string replacementTagsValues = substitution
-                                                           .Key
-                                                           .Replace(NewsletterTemplatesConstants.PlaceholdersStartTag, string.Empty)
-                                                           .Replace(NewsletterTemplatesConstants.PlaceholderEndTag, string.Empty)
-                                                           .Trim();
+                string trimmedTag = tag
+                    .Replace(NewsletterTemplatesConstants.PlaceholdersStartTag, string.Empty)
+                    .Replace(NewsletterTemplatesConstants.PlaceholderEndTag, string.Empty)
+                    .Trim();
 
                 string value;
 
                 // the order in the list of substitutions is important so we insert an empty 
                 // string even if there is no value in the subscriber properties.
-                if (!subscriberProperties.TryGetValue(replacementTagsValues, out value))
+                if (!subscriberProperties.TryGetValue(trimmedTag, out value))
                     value = string.Empty;
 
-                substitution.Value.Add(value);
-            }
-        }
- 
-        private Dictionary<string, List<string>> InitializeSubstitutions(IEnumerable<string> replacementTags, IDictionary<string, string> customHeaders)
-        {
-            var substitutions = new Dictionary<string, List<string>>(replacementTags.Count());
-
-            // Initializing the substitutions dictionary so that it can later be accessed by replacementTag.
-            foreach (var replacementTag in replacementTags)
-            {
-                substitutions[replacementTag] = new List<string>(this.BatchSize);
-            }
-
-            foreach (var customHeader in customHeaders)
-            {
-                // add substitution dictionaries only if the custom header value is a placeholder.
-                if (NewsletterTemplatesConstants.PlaceholdersRegex.IsMatch(customHeader.Value))
-                {
-                    substitutions[customHeader.Value] = new List<string>(this.BatchSize);
-                }
+                substitutions.Add(tag, value);
             }
 
             return substitutions;
         }
- 
+
         private IEnumerable<string> GetReplacementTags(IMessageJobRequest messageJob)
         {
             // TODO: add the replacement tags from the HTML and plain text messages in a hash set then return the set.AsEnumerable();
             // this way all replacement tags will be considered not just those in the HTML message.
-            var matches = NewsletterTemplatesConstants.PlaceholdersRegex.Matches(messageJob.MessageTemplate.BodyHtml);
+            var text = messageJob.MessageTemplate.BodyHtml;
+            if (text == null)
+            {
+                text = messageJob.MessageTemplate.PlainTextVersion;
+            }
+
+            var matches = NewsletterTemplatesConstants.PlaceholdersRegex.Matches(text);
             var replacementTags = new List<string>(matches.Count);
             foreach (Match match in matches)
             {
@@ -257,22 +220,18 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
 
         private void AddGlobalProperties(SG.SendGridMessage message, IMessageJobRequest messageJob)
         {
-            message.From = new MailAddress(messageJob.SenderEmailAddress, messageJob.SenderName);
+            message.From = new SG.EmailAddress(messageJob.SenderEmailAddress, messageJob.SenderName);
             message.Subject = messageJob.MessageTemplate.Subject;
-            message.Text = messageJob.MessageTemplate.PlainTextVersion;
-            message.Html = messageJob.MessageTemplate.BodyHtml;
-        }
+            message.PlainTextContent = messageJob.MessageTemplate.PlainTextVersion;
+            message.HtmlContent = messageJob.MessageTemplate.BodyHtml;
 
-        private void AddCustomHeaders(SG.SendGridMessage message, IDictionary<string, string> customMessageHeaders)
-        {
-            message.AddUniqueArgs(customMessageHeaders);
+            message.CustomArgs = new Dictionary<string, string>(messageJob.CustomMessageHeaders);
         }
 
         private void InitSettings(SenderProfileElement senderProfile)
         {
             var smtpSenderProfile = (SmtpSenderProfileElement)senderProfile;
-            this.Username = smtpSenderProfile.Username;
-            this.Password = smtpSenderProfile.Password;
+            this.ApiKey = smtpSenderProfile.Password;
         }
     }
 }
