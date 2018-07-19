@@ -5,11 +5,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using SendGrid;
-using SG = SendGrid.Helpers.Mail;
 using Telerik.Microsoft.Practices.Unity.Utility;
 using Telerik.Sitefinity.Services.Notifications;
 using Telerik.Sitefinity.Services.Notifications.Composition;
 using Telerik.Sitefinity.Services.Notifications.Configuration;
+using SG = SendGrid.Helpers.Mail;
 
 namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
 {
@@ -116,7 +116,6 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
             //// TODO: raise some events here. There is a high chance someone would like 
             //// to extend the message before or after it has been constructed in the following code.
             var message = new SG.SendGridMessage();
-            message.Personalizations = new List<SG.Personalization>();
             this.AddGlobalProperties(message, messageJob);
 
             // Adding per subscriber information that is needed to build the message template and the subscriber id custom message header.
@@ -140,7 +139,12 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
             {
                 // No need for asynchronous execution since the sender is invoked in a separate thread
                 // dedicated to sending the messages.
-                await transportWeb.SendEmailAsync(message);
+                var response = await transportWeb.SendEmailAsync(message);
+                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var responseBody = await response.Body.ReadAsStringAsync();
+                    return SendResult.ReturnFailed(new Exception(responseBody));
+                }
 
                 return SendResult.ReturnSuccess();
             }
@@ -158,20 +162,31 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
 
         private void AddSubscribersInfo(SG.SendGridMessage message, IMessageJobRequest messageJob, IEnumerable<ISubscriberResponse> subscribers)
         {
-            IEnumerable<string> replacementTags = this.GetReplacementTags(messageJob);
+            var replacementTags = this.GetReplacementTags(messageJob).ToList();
+            if (replacementTags.Count > 0)
+            {
+                message.Personalizations = new List<SG.Personalization>();
+            }
 
             // Filling in the substitutions data structure with per subscriber values via persionalizations.
             foreach (var subscriber in subscribers)
             {
                 // TODO: validate subscribers email addresses
                 // TODO: add email + recipient name as TO address.
-                var personalization = new SG.Personalization()
+                if (replacementTags.Count > 0)
                 {
-                    Tos = new List<SG.EmailAddress>() { new SG.EmailAddress(subscriber.Email) },
-                    Substitutions = this.CalculateSubstitutions(replacementTags, subscriber.ToDictionary())
-                };
+                    var personalization = new SG.Personalization()
+                    {
+                        Tos = new List<SG.EmailAddress>() { new SG.EmailAddress(subscriber.Email) },
+                        Substitutions = this.CalculateSubstitutions(replacementTags, subscriber.ToDictionary())
+                    };
 
-                message.Personalizations.Add(personalization);
+                    message.Personalizations.Add(personalization);
+                }
+                else
+                {
+                    message.AddTo(new SG.EmailAddress(subscriber.Email));
+                }
             }
         }
 
@@ -224,8 +239,10 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
             message.Subject = messageJob.MessageTemplate.Subject;
             message.PlainTextContent = messageJob.MessageTemplate.PlainTextVersion;
             message.HtmlContent = messageJob.MessageTemplate.BodyHtml;
-
-            message.CustomArgs = new Dictionary<string, string>(messageJob.CustomMessageHeaders);
+            if (messageJob.CustomMessageHeaders != null && messageJob.CustomMessageHeaders.Count > 0)
+            {
+                message.CustomArgs = new Dictionary<string, string>(messageJob.CustomMessageHeaders);
+            }
         }
 
         private void InitSettings(SenderProfileElement senderProfile)
