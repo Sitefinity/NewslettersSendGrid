@@ -1,9 +1,5 @@
 # Sitefinity Email campaigns SendGrid connector
 
-| Test | Status |
-|----|----|
-| Unit | [![Build Status](http://sdk-jenkins-ci.cloudapp.net/buildStatus/icon?job=Telerik.Sitefinity.Newsletters.SendGrid.CI)](http://sdk-jenkins-ci.cloudapp.net/job/Telerik.Sitefinity.Newsletters.SendGrid.CI/) |
-
 ### Summary
 _This project implements a two way communication between the SendGrid Web API and the Sitefinity email campaigns (newsletters) module._
 
