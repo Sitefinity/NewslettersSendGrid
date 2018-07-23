@@ -21,7 +21,7 @@ As for now the service functionality of the service is limited to writing failed
 
 ### How to install
 
-* Build the main project (Telerik.Sitefinity.Newsletters.SendGrid) in this repository with the correct Sitefinity package versions and place the resulting dll in the \bin directory of your Sitefinity web site or install the Sitefinity built package from the official Sitefinity NuGet repository. We will supply a signed package in our NuGet repository for each official Sitefinity version.
+* Build the main project (Telerik.Sitefinity.Newsletters.SendGrid) in this repository with the correct Sitefinity package versions and place the resulting dll (Telerik.Sitefinity.Newsletters.SendGrid.dll, SendGrid.dll, SendGrid.SmtpApi.dll) in the \bin directory of your Sitefinity web site or install the Sitefinity built package from the official Sitefinity NuGet repository. We will supply a signed package in our NuGet repository for each official Sitefinity version.
 
 * Install from Sitefinity NuGet repository:
 ```powershell
