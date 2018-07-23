@@ -116,6 +116,7 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
             //// TODO: raise some events here. There is a high chance someone would like 
             //// to extend the message before or after it has been constructed in the following code.
             var message = new SG.SendGridMessage();
+            message.Personalizations = new List<SG.Personalization>();
             this.AddGlobalProperties(message, messageJob);
 
             // Adding per subscriber information that is needed to build the message template and the subscriber id custom message header.
@@ -163,30 +164,19 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
         private void AddSubscribersInfo(SG.SendGridMessage message, IMessageJobRequest messageJob, IEnumerable<ISubscriberResponse> subscribers)
         {
             var replacementTags = this.GetReplacementTags(messageJob).ToList();
-            if (replacementTags.Count > 0)
-            {
-                message.Personalizations = new List<SG.Personalization>();
-            }
 
             // Filling in the substitutions data structure with per subscriber values via persionalizations.
             foreach (var subscriber in subscribers)
             {
                 // TODO: validate subscribers email addresses
                 // TODO: add email + recipient name as TO address.
-                if (replacementTags.Count > 0)
+                var personalization = new SG.Personalization()
                 {
-                    var personalization = new SG.Personalization()
-                    {
-                        Tos = new List<SG.EmailAddress>() { new SG.EmailAddress(subscriber.Email) },
-                        Substitutions = this.CalculateSubstitutions(replacementTags, subscriber.ToDictionary())
-                    };
+                    Tos = new List<SG.EmailAddress>() { new SG.EmailAddress(subscriber.Email) },
+                    Substitutions = this.CalculateSubstitutions(replacementTags, subscriber.ToDictionary())
+                };
 
-                    message.Personalizations.Add(personalization);
-                }
-                else
-                {
-                    message.AddTo(new SG.EmailAddress(subscriber.Email));
-                }
+                message.Personalizations.Add(personalization);
             }
         }
 
@@ -207,7 +197,10 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
                 if (!subscriberProperties.TryGetValue(trimmedTag, out value))
                     value = string.Empty;
 
-                substitutions.Add(tag, value);
+                if (!substitutions.ContainsKey(tag))
+                {
+                    substitutions.Add(tag, value);
+                }
             }
 
             return substitutions;
