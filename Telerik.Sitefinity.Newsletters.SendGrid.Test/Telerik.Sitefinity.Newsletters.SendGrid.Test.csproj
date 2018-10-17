@@ -63,50 +63,50 @@
     <Reference Include="Telerik.JustMock, Version=2018.1.117.2, Culture=neutral, PublicKeyToken=721b6c5bc0326b3a, processorArchitecture=MSIL">
       <HintPath>..\packages\JustMock.2018.1.117.2\lib\Net\Telerik.JustMock.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Personalization, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Personalization.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Personalization, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Personalization.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Personalization.Impl, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Personalization.Impl.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Personalization.Impl, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Personalization.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Search, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Search.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Search, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Search.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Search.Impl, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Search.Impl.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Search.Impl, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Search.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.Comments, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.Comments.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.Comments, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.Comments.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.Comments.Impl, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.Comments.Impl.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.Comments.Impl, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.Comments.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.Documents, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.Documents.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.Documents, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.Documents.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.Documents.Impl, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.Documents.Impl.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.Documents.Impl, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.Documents.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.Events, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.Events.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.Events, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.Events.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.Notifications, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.Notifications.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.Notifications, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.Notifications.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.Notifications.Impl, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.Notifications.Impl.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.Notifications.Impl, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.Notifications.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.RecycleBin, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.RecycleBin.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.RecycleBin, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.RecycleBin.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.RecycleBin.Impl, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.RecycleBin.Impl.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.RecycleBin.Impl, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.RecycleBin.Impl.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.Statistics, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.Statistics.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.Statistics, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.Statistics.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Sitefinity.Services.Statistics.Impl, Version=11.0.6700.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.0.6700\lib\net471\Telerik.Sitefinity.Services.Statistics.Impl.dll</HintPath>
+    <Reference Include="Telerik.Sitefinity.Services.Statistics.Impl, Version=11.1.6800.0, Culture=neutral, PublicKeyToken=b28c218413bdf563, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telerik.Sitefinity.ServicesImpl.11.1.6800\lib\net471\Telerik.Sitefinity.Services.Statistics.Impl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -122,6 +122,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Mocks\SubscriberMock.cs" />
     <Compile Include="SendGridSenderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

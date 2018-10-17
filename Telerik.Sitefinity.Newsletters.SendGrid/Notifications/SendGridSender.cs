@@ -9,6 +9,7 @@ using Telerik.Microsoft.Practices.Unity.Utility;
 using Telerik.Sitefinity.Services.Notifications;
 using Telerik.Sitefinity.Services.Notifications.Composition;
 using Telerik.Sitefinity.Services.Notifications.Configuration;
+using Telerik.Sitefinity.Services.Notifications.Model;
 using SG = SendGrid.Helpers.Mail;
 
 namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
@@ -99,9 +100,20 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Notifications
         {
             Guard.ArgumentNotNull(messageJob, "messageJob");
             Guard.ArgumentNotNull(subscribers, "subscribers");
-
+            
             var message = this.ConstructMessage(messageJob, subscribers);
             var task = this.SendAsync(message);
+            var subscriberResulType = task.Result.Type == SendResultType.Failed ? SendResultType.FailedRecipient : task.Result.Type;
+            foreach (var subscriber in subscribers)
+            {
+               var notifiableSubscriber = subscriber as INotifiable;
+                if (notifiableSubscriber != null)
+                {
+                    notifiableSubscriber.Result = subscriberResulType;
+                    notifiableSubscriber.IsNotified = true;
+                }
+            }
+
             return task.Result;
         }
 
