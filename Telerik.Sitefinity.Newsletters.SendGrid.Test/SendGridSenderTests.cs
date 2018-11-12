@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using Telerik.JustMock;
 using Telerik.Sitefinity.Newsletters.SendGrid.Notifications;
 using Telerik.Sitefinity.Services.Notifications;
+using Telerik.Sitefinity.Services.Notifications.Model;
+using Telerik.Sitefinity.Newsletters.SendGrid.Test.Mocks;
+using System.Threading.Tasks;
 
 namespace Telerik.Sitefinity.Newsletters.SendGrid.Test
 {
@@ -35,6 +38,29 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Test
             Assert.AreEqual(messageJob.MessageTemplate.BodyHtml, message.HtmlContent);
             Assert.AreEqual(messageJob.MessageTemplate.PlainTextVersion, message.PlainTextContent);
             this.AssertHeader(message);
+        }
+
+        /// <summary>
+        /// Tests the message construction.
+        /// </summary>
+        [TestMethod]
+        public void TestSubscribersResult()
+        {
+            // Arrange
+            var messageJob = this.MockMessageJob();
+            var subscribers = this.MockNotifiableSubscribers();
+            var sender = new SendGridSender();
+            
+            // Act
+            var message = sender.ConstructMessage(messageJob, subscribers);
+            var result = sender.SendMessage(messageJob, subscribers);
+
+            // Assert
+            foreach (var subscriber in subscribers)
+            {
+                Assert.IsTrue(subscriber.IsNotified);
+                Assert.IsTrue(subscriber.Result == SendResultType.Success || subscriber.Result == SendResultType.FailedRecipient);
+            }
         }
 
         private void AssertHeader(SendGridMessage message)
@@ -93,6 +119,29 @@ namespace Telerik.Sitefinity.Newsletters.SendGrid.Test
             Mock.Arrange(() => subscriberOne.FirstName).Returns(firstName);
             Mock.Arrange(() => subscriberOne.LastName).Returns(lastName);
             Mock.Arrange(() => subscriberOne.ResolveKey).Returns(resolveKey);
+            return subscriberOne;
+        }
+
+        private ICollection<SubscriberMock> MockNotifiableSubscribers()
+        {
+            return new List<SubscriberMock>()
+            {
+                // Creating the first subscriber with null for last name to check that null values are not skipped in the 
+                // resulting SendGrid message which will mess the whole substitution.
+                this.CreateNotifiableSubscriber(Subscriber1Email, Subscriber1FirstName, null, Subscriber1ResolveKey),
+                this.CreateNotifiableSubscriber(Subscriber2Email, Subscriber2FirstName, Subscriber2LastName, Subscriber2ResolveKey)
+            };
+        }
+
+        private SubscriberMock CreateNotifiableSubscriber(string email, string firstName, string lastName, string resolveKey)
+        {
+            SubscriberMock subscriberOne = new SubscriberMock();
+            subscriberOne.Email = email;
+            subscriberOne.FirstName = firstName;
+            subscriberOne.LastName = lastName;
+            subscriberOne.ResolveKey = resolveKey;
+            subscriberOne.CustomProperties = new Dictionary<string, string>();
+
             return subscriberOne;
         }
 
