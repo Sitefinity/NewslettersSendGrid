@@ -4,8 +4,8 @@ using System.Reflection;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyCompany("Telerik")]
-[assembly: AssemblyProduct("Telerik Sitefinity CMS")]
+[assembly: AssemblyCompany("Progress")]
+[assembly: AssemblyProduct("Progress Sitefinity CMS")]
 [assembly: AssemblyCopyright("Copyright © 2005-2019 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.")]
 [assembly: AssemblyTrademark("Sitefinity")]
 // Version information for an assembly consists of the following four values:
@@ -19,10 +19,5 @@ using System.Reflection;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-#if DEBUG
-[assembly: AssemblyVersion("11.0.7600.0")]
-[assembly: AssemblyFileVersion("11.0.7600.0")]
-#else
-[assembly: AssemblyVersion("11.0.7600.0")]
-[assembly: AssemblyFileVersion("11.0.7600.0")]
-#endif
+[assembly: AssemblyVersion("12.0.0")]
+[assembly: AssemblyFileVersion("12.0.0")]
