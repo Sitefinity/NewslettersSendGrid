@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Telerik.Sitefinity.Newsletters.SendGrid.Test")]
-[assembly: AssemblyCopyright("Copyright © 2005-2020 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2005-2023 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

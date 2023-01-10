@@ -16,7 +16,6 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -444,7 +443,6 @@
     <Analyzer Include="..\packages\AWSSDK.SQS.3.7.2.55\analyzers\dotnet\cs\AWSSDK.SQS.CodeAnalysis.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="$(SolutionDir)\Builds\StyleCop\StyleCop.targets" />
   <Target Name="BeforeBuild">
     <Copy SourceFiles="$(SolutionDir)Builds\FxCop\CustomDictionary.xml" DestinationFolder="$(CodeAnalysisPath)" OverwriteReadOnlyFiles="true" Retries="10" ContinueOnError="true" />
