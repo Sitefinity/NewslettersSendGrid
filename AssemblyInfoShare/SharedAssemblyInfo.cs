@@ -6,7 +6,7 @@ using System.Reflection;
 // associated with an assembly.
 [assembly: AssemblyCompany("Progress")]
 [assembly: AssemblyProduct("Progress Sitefinity CMS")]
-[assembly: AssemblyCopyright("Copyright © 2005-2022 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2005-2023 Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.")]
 [assembly: AssemblyTrademark("Sitefinity")]
 // Version information for an assembly consists of the following four values:
 //
