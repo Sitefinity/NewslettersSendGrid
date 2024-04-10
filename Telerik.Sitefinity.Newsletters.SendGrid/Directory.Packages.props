@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Telerik.Sitefinity.ServicesImpl" Version="15.1.8300" />
+    <PackageVersion Include="Telerik.Sitefinity.Core" Version="15.1.8300" />
+    <PackageVersion Include="Sendgrid" Version="9.9.0" />
+    <PackageVersion Include="SendGrid.SmtpApi" Version="1.3.3" />
+  </ItemGroup>
+</Project>

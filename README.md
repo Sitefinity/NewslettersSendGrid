@@ -1,4 +1,4 @@
-# Sitefinity Email campaigns SendGrid connector
+# Sitefinity Email campaigns SendGrid connector 
 
 ### Summary
 _This project implements a two way communication between the SendGrid Web API and the Sitefinity email campaigns (newsletters) module._
